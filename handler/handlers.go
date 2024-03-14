@@ -4,7 +4,6 @@ package handlers
 import (
 	"net/http"
 	"strconv"
-	"your-app/models"
 
 	"github.com/gin-gonic/gin"
 )

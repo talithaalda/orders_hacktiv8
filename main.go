@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"./handler/handlers"
 	"github.com/gin-gonic/gin"
+	"github.com/talithaalda/orders_hacktiv8/handler/handlers"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
