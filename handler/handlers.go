@@ -6,6 +6,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/talithaalda/orders_hacktiv8/models/models"
 )
 
 // CreateOrder creates a new order
