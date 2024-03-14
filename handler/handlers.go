@@ -85,7 +85,15 @@ func DeleteOrder(c *gin.Context) {
         return
     }
 
-    db.Delete(&order)
+    if err := db.Where("order_id = ?", id).Delete(&models.Item{}).Error; err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        return
+    }
+
+    if err := db.Delete(&order).Error; err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        return
+    }
 
     c.JSON(http.StatusOK, gin.H{"message": "Order deleted successfully"})
 }
