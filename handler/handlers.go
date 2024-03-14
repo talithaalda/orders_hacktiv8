@@ -1,13 +1,29 @@
 // handlers.go
-package handlers
+package handler
 
 import (
 	"net/http"
 	"strconv"
+	"tidy/models"
 
 	"github.com/gin-gonic/gin"
-	"github.com/talithaalda/orders_hacktiv8/models/models"
+	"gorm.io/gorm"
 )
+var db *gorm.DB
+func SetDB(database *gorm.DB) {
+    db = database
+}
+// GetAllOrders retrieves all orders
+func GetAllOrders(c *gin.Context) {
+    var orders []models.Order
+
+    if err := db.Preload("Items").Find(&orders).Error; err != nil {
+        c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+        return
+    }
+
+    c.JSON(http.StatusOK, orders)
+}
 
 // CreateOrder creates a new order
 func CreateOrder(c *gin.Context) {
